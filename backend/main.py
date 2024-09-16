@@ -77,3 +77,8 @@ def get_cards():
 @app.post("/")
 def create_item(item: str):
     return {"item": item}
+
+
+@app.get("/testing")
+def git_commitizen_testing():
+    return {"testing": "git_commitizen"}
