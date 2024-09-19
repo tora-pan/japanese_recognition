@@ -1,6 +1,9 @@
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
+from fastapi.security import OAuth2PasswordBearer
+
+
 app = FastAPI()
 
 app.add_middleware(
@@ -10,6 +13,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
 
 @app.get("/")
@@ -77,8 +82,3 @@ def get_cards():
 @app.post("/")
 def create_item(item: str):
     return {"item": item}
-
-
-@app.get("/testing")
-def git_commitizen_testing():
-    return {"testing": "git_commitizen"}
