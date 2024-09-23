@@ -1,4 +1,3 @@
-import CardContainer from "./components/card-container";
 import HiraganaCard from "./components/hiragana-card";
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import Home from "./pages/home";

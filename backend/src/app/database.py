@@ -2,7 +2,9 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-SQLALCHEMY_DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}"
+from ..config import DB_USER, DB_PASSWORD, DB_HOST, DB_NAME
+
+SQLALCHEMY_DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@japanese_recognition-db-1/{DB_NAME}"
 
 engine = create_engine(url=SQLALCHEMY_DATABASE_URL, echo=False)
 

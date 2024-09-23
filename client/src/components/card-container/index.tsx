@@ -4,7 +4,7 @@ import DrawingCanvas from "../drawing-canvas";
 
 const CardContainer = () => {
   type Card = {
-    hiragana: string;
+    kana: string;
     romaji: string;
   };
 
@@ -35,8 +35,9 @@ const CardContainer = () => {
 
   useEffect(() => {
     const fetchCards = async () => {
-      const response = await axios.get("http://127.0.0.1:8003/cards");
-      setCards(response.data.data);
+      const response = await axios.get("http://localhost:8003/cards");
+      console.log(response.data);
+      setCards(response.data);
     };
     fetchCards();
   }, []);
@@ -47,7 +48,7 @@ const CardContainer = () => {
       {cards ? (
         cards.map((card, index) => (
           <button onClick={() => handleClick(card)} key={index} className="border-2 border-gray-200 text-gray-700 p-4 hover:border-gray-500 hover:font-medium hover:text-blue-900 hover:text-md">
-            <h3 key={index}>{card.hiragana}</h3>
+            <h3 key={index}>{card.kana}</h3>
             <p>{card.romaji}</p>
           </button>
         ))

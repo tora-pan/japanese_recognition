@@ -1,12 +1,12 @@
 type Props = {
-  hiragana: string;
+  kana: string;
   romaji: string;
   image?: string;
 }
 
 const HiraganaCard = (props: Props) => {
 
-  const { hiragana, romaji } = props;
+  const { kana, romaji } = props;
 
   return (
     <a className="flex flex-col group bg-white border shadow-sm rounded-xl overflow-hidden hover:shadow-lg focus:outline-none focus:shadow-lg transition" href="#">
@@ -15,7 +15,7 @@ const HiraganaCard = (props: Props) => {
   </div>
   <div className="p-4 md:p-5">
     <h3 className="text-lg font-bold text-gray-800">
-      {hiragana} - {romaji}
+      {kana} - {romaji}
     </h3>
     <p className="mt-1 text-gray-500">
       

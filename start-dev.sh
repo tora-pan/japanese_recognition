@@ -1,1 +1,1 @@
-uvicorn backend.main:app --port 8003 --reload
+uvicorn src.app.main:app --port 8003 --reload
