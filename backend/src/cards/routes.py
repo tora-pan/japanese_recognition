@@ -16,18 +16,8 @@ router = APIRouter(
 
 @router.get("/", response_model=list[CardSchema])
 async def get_cards(db: Session = Depends(get_db)):
-    print("made it ========")
-    print(db)
     all_cards = db.query(Card).all()
-    print(all_cards)
-    print("====allcards====")
-    print(all_cards[0].__dict__)
     return [CardSchema.model_validate(card).model_dump() for card in all_cards]
-
-    # if not all_cards:
-    #     raise HTTPException(status_code=404, detail="No cards found")
-
-    # return [CardSchema.model_validate(card).model_dump() for card in all_cards]
 
 
 @router.post("/", response_model=str)

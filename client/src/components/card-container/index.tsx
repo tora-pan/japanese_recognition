@@ -29,8 +29,6 @@ const CardContainer = () => {
 
   const handleClick = (selectedCard:Card) => {
     setCard(selectedCard);
-    console.log("Card state", selectedCard);
-    // setDrawWindowOpen(!drawWindowOpen);
   }
 
   useEffect(() => {
