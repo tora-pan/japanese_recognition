@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
 from ..cards.routes import router as card_router
+from ..auth.routes import router as login_router
 
 app = FastAPI()
 
@@ -25,6 +26,7 @@ app.add_middleware(
 )
 
 app.include_router(router=card_router)
+app.include_router(router=login_router)
 
 
 # @app.get("/cards")
