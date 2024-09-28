@@ -3,8 +3,8 @@
 # read in data from a csv file to seed the db
 
 import csv
-from backend.src.data.models import Card
-from backend.src.app.database import get_db
+from src.data.models import Card 
+from src.app.database import get_db
 
 from sqlalchemy.orm import Session
 
@@ -12,17 +12,15 @@ db: Session = next(get_db())
 
 
 def seed_hiragana():
-    with open("backend/src/utils/data/hiragana.csv", newline="") as csvfile:
+    with open("src/utils/data/hiragana.csv", newline="") as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             hiragana = Card(
-                kana=row["character"],
-                romaji=row["romanization"],
-                stroke_count=row["stroke_count"],
-                meaning=row["meaning"],
+                kana=row["hiragana"],
+                romaji=row["romaji"],
             )
-            db.session.add(hiragana)
-        db.session.commit()
+            db.add(hiragana)
+        db.commit()
 
 
 def seed_katakana():
@@ -52,7 +50,4 @@ def seed_kanji():
             db.session.add(hiragana)
         db.session.commit()
 
-
 seed_hiragana()
-seed_katakana()
-seed_kanji()

@@ -45,6 +45,8 @@ services:
       - postgres-data:/var/lib/postgresql/data
     env_file:
       - .env
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
 volumes:
   postgres-data: {}

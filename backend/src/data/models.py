@@ -28,11 +28,9 @@ class Card(Base):
     id = mapped_column(Integer, primary_key=True, autoincrement=True)
     kana = mapped_column(String, nullable=False)
     romaji = mapped_column(String, nullable=False)
-    stroke_count = mapped_column(Integer, nullable=False)
-    meaning = mapped_column(
-        String
-    )  # Optional, in case you want to store meaning of the character
-    example_word = mapped_column(String)  # Optional, for example words
+    stroke_count = mapped_column(Integer, nullable=True)
+    meaning = mapped_column(String, nullable=True)
+    example_word = mapped_column(String, nullable=True)
 
     # Relationship for users' progress with this card
     progress = relationship("UserCardProgress", back_populates="card")
