@@ -13,3 +13,22 @@ class UserCreateSchema(BaseModel):
 
     class Config:
       from_attributes = True
+
+
+class UserResponseSchema(BaseModel):
+    username: str
+    email: str
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    birth_date: Optional[date] = None
+
+    class Config:
+      orm_mode = True
+
+
+class LoginSchema(BaseModel):
+    email: str
+    password: str
+
+    class Config:
+      from_attributes = True

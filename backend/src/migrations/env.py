@@ -15,7 +15,7 @@ def url_from_env() -> str:
     Create the sqlalchemy url using the same settings we pass into the
     docker environment.
     """
-    db_host = os.environ.get("DB_HOST", "172.21.0.2")
+    db_host = os.environ.get("DB_HOST", "localhost")
     db_name = os.environ.get("DB_NAME", "japanese_recog")
     db_user = os.environ.get("DB_USER", "japanese_recog_user")
     db_password = os.environ.get("DB_PASSWORD", "H1ragana")

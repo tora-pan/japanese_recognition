@@ -28,9 +28,9 @@ def verify_password(plain_password, hashed_password):
 def authenticate_user(email: str, password: str, db: Session = Depends(get_db)):
     user = db.query(User).filter(User.email == email).first()
     if not user or not verify_password(password, user.password_hash):
-        return False
+        raise HTTPException(status_code=401, detail="Incorrect email or password")
 
-    create_access_token(data={"sub": user.email})
+    token = create_access_token(data={"sub": user.email})
     return user
 
 
@@ -63,7 +63,7 @@ def get_current_user(
             raise HTTPException(
                 status_code=401, detail="Invalid authentication credentials"
             )
-        user = db.query(models.User).filter(models.User.email == email).first()
+        user = db.query(User).filter(User.email == email).first()
         if user is None:
             raise HTTPException(status_code=401, detail="User not found")
         return user
