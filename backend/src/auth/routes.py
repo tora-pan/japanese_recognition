@@ -7,7 +7,7 @@ from ..data.models import User
 from .config import Config
 from ..app.database import get_db
 
-from ..utils import get_password_hash
+from ..utils.auth import get_password_hash
 
 router = APIRouter(
     prefix=Config.prefix,
