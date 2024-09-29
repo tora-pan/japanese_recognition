@@ -7,7 +7,7 @@ from ..data.models import User
 from .config import Config
 from ..app.database import get_db
 
-from ..utils.auth import get_password_hash
+from ..utils.auth import get_current_user, get_password_hash
 
 router = APIRouter(
     prefix=Config.prefix,
@@ -34,3 +34,8 @@ def register_user(user: UserCreateSchema, db: Session = Depends(get_db)):
 @router.post("/login")
 def login_user():
     return {"message": "Login route"}
+
+
+@router.get("/me", response_model=UserCreateSchema)
+def read_user_me(current_user: User = Depends(get_current_user)):
+    return current_user
