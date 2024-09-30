@@ -1,4 +1,5 @@
-from fastapi import Depends, HTTPException, Security
+from fastapi import Depends, HTTPException, Response, Security
+from fastapi.responses import JSONResponse, RedirectResponse
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.orm import Session
 
@@ -31,7 +32,10 @@ def authenticate_user(email: str, password: str, db: Session = Depends(get_db)):
         raise HTTPException(status_code=401, detail="Incorrect email or password")
 
     token = create_access_token(data={"sub": user.email})
-    return user
+    print("we are here")
+    response = RedirectResponse(url="http://localhost:3000/", status_code=303)
+    response.set_cookie(key="access_token", value=f"Bearer {token[0]}", httponly=True)
+    return {"token": token, "username": user.username, "email": user.email}
 
 
 SECRET_KEY = "your_secret_key"
@@ -46,6 +50,7 @@ def create_access_token(data: dict, expires_delta: timedelta = None):
         expire = datetime.utcnow() + timedelta(minutes=15)
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+
     return encoded_jwt
 
 

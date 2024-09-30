@@ -14,7 +14,6 @@ const CardContainer = () => {
 
   useEffect(() => {
     if (card){
-      console.log('card is ', card);
       setDrawWindowOpen(true);
     }
     else {
@@ -34,7 +33,6 @@ const CardContainer = () => {
   useEffect(() => {
     const fetchCards = async () => {
       const response = await axios.get("http://localhost:8003/cards");
-      console.log(response.data);
       setCards(response.data);
     };
     fetchCards();

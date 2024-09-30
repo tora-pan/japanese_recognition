@@ -16,8 +16,9 @@ class UserCreateSchema(BaseModel):
 
 
 class UserResponseSchema(BaseModel):
-    username: str
-    email: str
+    username: Optional[str]
+    email: Optional[str]
+    token: Optional[str] = None
     first_name: Optional[str] = None
     last_name: Optional[str] = None
     birth_date: Optional[date] = None
