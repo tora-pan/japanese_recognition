@@ -61,6 +61,7 @@ def get_current_user(
     token: HTTPAuthorizationCredentials = Security(security),
     db: Session = Depends(get_db),
 ):
+    print("weare here")
     try:
         payload = jwt.decode(token.credentials, SECRET_KEY, algorithms=[ALGORITHM])
         email: str = payload.get("sub")

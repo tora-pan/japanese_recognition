@@ -3,8 +3,9 @@
 # read in data from a csv file to seed the db
 
 import csv
-from src.data.models import Card 
-from src.app.database import get_db
+
+from .src.data.models import Card, UserCardProgress
+from .src.app.database import get_db
 
 from sqlalchemy.orm import Session
 

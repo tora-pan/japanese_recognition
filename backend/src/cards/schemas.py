@@ -1,13 +1,31 @@
+from datetime import datetime
 from typing import Optional
 
 from pydantic import BaseModel
 
 
+class ProgressSchema(BaseModel):
+    review_count: int
+    last_reviewed_at: datetime
+    accuracy: float
+
+    class Config:
+        from_attributes = True
+
+
 class CardSchema(BaseModel):
+    id: int
     kana: str
     romaji: str
     stroke_count: Optional[int] = None
-    meaning:Optional[str] = None
+    meaning: Optional[str] = None
     example_word: Optional[str] = None
+    # progress: Optional[ProgressSchema] = None
+
     class Config:
         from_attributes = True
+
+
+class CardUpdateSchema(BaseModel):
+    user_id: str
+    progress: ProgressSchema
