@@ -41,10 +41,13 @@ class UserCardProgress(Base):
     __tablename__ = "user_card_progress"
 
     id = mapped_column(Integer, primary_key=True, autoincrement=True)
-    user_id = mapped_column(Integer, ForeignKey("users.id"), nullable=False)
+    username = mapped_column(String, ForeignKey("users.username"), nullable=False)
     card_id = mapped_column(Integer, ForeignKey("cards.id"), nullable=False)
     last_reviewed_at = mapped_column(
-        DateTime, server_default=func.now(), onupdate=func.now()
+        DateTime(timezone=True),
+        server_default=func.now(),
+        onupdate=func.now(),
+        nullable=True,
     )  # Tracks last review time
     review_count = mapped_column(Integer, default=0)  # Number of times reviewed
     accuracy = mapped_column(Float, default=0.0)  # Score for accuracy in strokes

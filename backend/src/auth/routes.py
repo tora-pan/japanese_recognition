@@ -38,6 +38,6 @@ def login_user(user: LoginSchema, db: Session = Depends(get_db)):
     return authenticate_user(email=user.email, password=user.password, db=db)
 
 
-@router.get("/me", response_model=UserCreateSchema)
+@router.get("/me", response_model=UserResponseSchema)
 def read_user_me(current_user: User = Depends(get_current_user)):
     return current_user

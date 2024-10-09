@@ -18,13 +18,13 @@ router = APIRouter(
 
 
 @router.get("/", response_model=list[CardSchema])
-async def get_cards(db: Session = Depends(get_db)):
+async def get_cards(db: Session = Depends(get_db), user=Depends(get_current_user)):
     all_cards = db.query(Card).all()
     return [CardSchema.model_validate(card).model_dump() for card in all_cards]
 
 
 @router.post("/", response_model=str)
-async def create_card(card: CardSchema, db: Session = Depends(get_db)):
+async def create_card(card: CardSchema, db: Session = Depends(get_db), user=Depends(get_current_user)):
     # create new card
     new_card = Card(
         kana=card.kana,
@@ -47,18 +47,32 @@ async def update_card_progress(
     db: Session = Depends(get_db),
     user=Depends(get_current_user),
 ):
-    card = db.query(Card).filter(Card.id == card_id).first()
-    if not card:
-        raise HTTPException(status_code=404, detail="Card not found")
-    if not card.progress:
-        card.progress = UserCardProgress(
-            user_id=user.id,
-            card_id=card.id,
-        )
-        db.add(card.progress)
-        db.commit()
+    
+    print("guess we are good", user)
 
-    card.progress.review_count += 1
+    progress = (
+        db.query(UserCardProgress)
+        .filter(
+            UserCardProgress.username == user.username,
+            UserCardProgress.card_id == card_id,
+        )
+        .first()
+    )
+
+    if not progress:
+        prog = UserCardProgress(
+            username=updated_card.username,
+            card_id=card_id,
+
+        )
+        db.add(prog)
+        db.commit()
+        db.refresh(prog)
+        return f"Card progress created"
+
+    progress.review_count += 1
+    progress.last_reviewed_at = datetime.utcnow()
+    progress.accuracy = updated_card.progress.accuracy or progress.accuracy
     db.commit()
-    db.refresh(card.progress)
-    return f"Card {card.kana} progress updated"
+    db.refresh(progress)
+    return f"Card progress updated"

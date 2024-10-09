@@ -5,8 +5,8 @@ from pydantic import BaseModel
 
 
 class ProgressSchema(BaseModel):
-    review_count: int
-    last_reviewed_at: datetime
+    review_count: Optional[int] = None
+    last_reviewed_at: Optional[datetime] = None
     accuracy: float
 
     class Config:
@@ -27,5 +27,5 @@ class CardSchema(BaseModel):
 
 
 class CardUpdateSchema(BaseModel):
-    user_id: str
+    username: str
     progress: ProgressSchema
