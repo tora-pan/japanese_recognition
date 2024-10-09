@@ -3,6 +3,21 @@ import { useEffect, useState } from "react";
 import DrawingCanvas from "../drawing-canvas";
 import styled from "styled-components";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import { MakeRequest } from "../../utils/axiosWrapper";
+
+const GlassButton = styled.button`
+    width: 70%;
+    margin: 40px auto;
+    padding: 2rem;
+    background: rgba(0, 166, 255, 0.3);
+    color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 2rem;
+  `;
 
 const CardContainer = () => {
   type Card = {
@@ -29,10 +44,11 @@ const CardContainer = () => {
     setDrawWindowOpen(false);
     const updateUserProgress = async () => {
       try {
-        const response = await axios.put(
-          `http://localhost:8003/cards/progress/${cardId}`,
-          {"lastPracticed": new Date()}
-        );
+        const response = await MakeRequest({
+          method: "PUT",
+          route: `/cards/progress/${cardId}`,
+          data: {"last_reviewed_at": new Date()}
+        });
         console.log(response);
       } catch (error) {
         console.log(error);
@@ -50,25 +66,16 @@ const CardContainer = () => {
 
   useEffect(() => {
     const fetchCards = async () => {
-      const response = await axios.get("http://localhost:8003/cards");
-      setCards(response.data);
+      const response = await MakeRequest({
+        method: "GET",
+        route: "/cards",
+      });
+      setCards(response);
     };
     fetchCards();
   }, []);
 
-  const GlassButton = styled.button`
-    width: 70%;
-    margin: 40px auto;
-    padding: 2rem;
-    background: rgba(0, 166, 255, 0.3);
-    color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    padding: 2rem;
-  `;
+  
 
   return (
     <div className="grid grid-cols-5 gap-1">

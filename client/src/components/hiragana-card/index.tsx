@@ -14,7 +14,7 @@ const HiraganaCard = (props: Props) => {
     <img className="size-full absolute top-0 start-0 object-cover group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out rounded-t-xl" src="https://images.unsplash.com/photo-1680868543815-b8666dba60f7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=560&q=80" alt="Card Image" />
   </div>
   <div className="p-4 md:p-5">
-    <h3 className="text-lg font-bold text-gray-800">
+    <h3 className="text-lg font-bold text-gray-800 ">
       {kana} - {romaji}
     </h3>
     <p className="mt-1 text-gray-500">

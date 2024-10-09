@@ -10,7 +10,7 @@ export default function App() {
       <Routes>
         <Route element={<ProtectedRoutes />}>
           <Route path="/" element={<Home />} />
-          <Route path="/:id" element={<HiraganaCard />} />
+          {/* <Route path="/:id" element={<HiraganaCard />} /> */}
         </Route>
         <Route path="/login" element={<LoginPage />} />
       </Routes>

@@ -53,11 +53,10 @@ const LoginPage = () => {
 
   const login = async (email: string, password: string) => {
     try {
-      const response = await axios.post("http://localhost:8003/auth/login/", {
+      const response = await axios.post("http://localhost:8003/auth/login", {
         email: email,
         password: password,
       });
-      console.log(response);
       return response;
     } catch (error) {
       console.log(error);

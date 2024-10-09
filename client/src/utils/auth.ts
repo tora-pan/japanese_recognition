@@ -8,6 +8,7 @@ export const setAuthenticationResult = async (
 
 
 export const isAuthenticated = () => {
+    console.log('isAuthenticated', sessionStorage.getItem("AccessToken"));
     return sessionStorage.getItem("AccessToken");
 }
 
