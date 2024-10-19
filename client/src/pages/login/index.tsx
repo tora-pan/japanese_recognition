@@ -89,7 +89,7 @@ const LoginPage = () => {
   return (
     <GlassDiv>
       <StyledForm onSubmit={handleSubmit}>
-        <label>Username</label>
+        <label>Email</label>
         <StyledInput type="text" placeholder="Email or Phone" name="username" />
         <label>Password</label>
         <StyledInput type="password" placeholder="Password" name="password" />

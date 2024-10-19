@@ -16,6 +16,8 @@ class User(Base):
     password_hash = mapped_column(String, nullable=False)
     email = mapped_column(String, nullable=False, unique=True)
     created_at = mapped_column(DateTime, server_default=func.now())
+    first_name = mapped_column(String, nullable=True)
+    last_name = mapped_column(String, nullable=True)
 
     # Relationship to track user progress
     progress = relationship("UserCardProgress", back_populates="user")

@@ -21,10 +21,12 @@ export async function MakeRequest({
     url: `http://localhost:8003${route}`,
     headers: {
       "Content-Type": "application/json",
-      "X-Token": token,
+      "Authorization": `Bearer ${token}`,
       ...headers,
     },
   };
+
+  console.log(requestConfig);
 
   if (data) requestConfig.data = data;
 

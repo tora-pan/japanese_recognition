@@ -48,8 +48,6 @@ async def update_card_progress(
     user=Depends(get_current_user),
 ):
     
-    print("guess we are good", user)
-
     progress = (
         db.query(UserCardProgress)
         .filter(
